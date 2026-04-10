@@ -1,6 +1,5 @@
 import axios, { type AxiosInstance } from "axios";
 
-
 interface ApiClientOptions {
   baseURL: string;
 }
@@ -29,20 +28,18 @@ const ApiClient = (options: ApiClientOptions): AxiosInstance => {
       console.error(error);
 
       throw error;
-    }
+    },
   );
 
   return instance;
 };
 
-
 const setClientToken = (instance: AxiosInstance, token: string) => {
   instance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 };
 
-
 const apiClient = ApiClient({
-  baseURL: "http://localhost:4321/api/" ,
+  baseURL: "/api/",
 });
 
 export { apiClient, setClientToken };

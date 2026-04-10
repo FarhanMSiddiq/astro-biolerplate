@@ -12,9 +12,9 @@ Astro template dengan **PostgreSQL** sebagai database dan **daisyUI** untuk UI, 
 
 ## 🛠 Tech Stack
 
-- **Node.js**: v20.18.2
-- **pnpm**: v10.2.1
-- **Astro**: v5.2.5
+- **Node.js**: v22.22.0
+- **pnpm**: v10.33.0
+- **Astro**: v6.1.5
 - **UI**: daisyUI
 - **Database**: PostgreSQL
 

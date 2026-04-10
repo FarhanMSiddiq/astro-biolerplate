@@ -22,7 +22,7 @@
     "@nanostores/react": "0.8.4",
     "@types/bcryptjs": "2.4.6",
     "@types/react-dom": "19.0.3",
-    "astro": "5.2.5",
+    "astro": "6.1.5",
     "axios": "1.7.9",
     "dotenv": "16.4.7",
     "nanostores": "0.11.4",

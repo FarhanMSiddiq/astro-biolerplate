@@ -1,0 +1,31 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Login from "./login/_login";
+
+// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
+// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+---
+
+<script>
+  import Swal from "sweetalert2";
+  window.addEventListener("triggerActions", async (event) => {
+    const customEvent = event as CustomEvent;
+    const message = customEvent.detail?.message;
+    const status = customEvent.detail?.status;
+
+    Swal.fire({
+      title: status == "success" ? "Sukses!" : "Error!",
+      text: message,
+      icon: status,
+      confirmButtonText: "Oke",
+    }).then(() => {
+      if (status == "success") {
+        window.location.href = "/user";
+      }
+    });
+  });
+</script>
+
+<Layout>
+  <Login client:load />
+</Layout>

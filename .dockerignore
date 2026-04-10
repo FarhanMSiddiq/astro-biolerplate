@@ -1,0 +1,33 @@
+# Node modules
+node_modules
+npm-debug.log
+
+# Build output
+dist
+build
+
+# Docker file
+Dockerfile*
+
+# Environment files
+.env
+.env.*
+
+# Git directories and files
+.git
+.gitignore
+
+# IDE configuration files
+.vscode
+.idea
+
+# Logs
+*.log
+
+# Temporary files
+*.swp
+*.bak
+*.tmp
+
+# Optional: cache
+.cache

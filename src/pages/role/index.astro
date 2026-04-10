@@ -1,0 +1,44 @@
+---
+import Navbar from "../../components/Navbar.astro";
+import CreateRole from "./components/_create";
+import ListRole from "./components/_list";
+import Layout from "../../layouts/Layout.astro";
+import { atom } from "nanostores";
+import { type Role } from "../../types/role";
+import { getRole } from "./actions/list";
+
+const role = atom<Role[]>([]);
+
+const getData = await getRole();
+if (getData.status === 200) {
+  role.set(getData.data);
+}
+---
+
+<script>
+  import Swal from "sweetalert2";
+  window.addEventListener("triggerActions", async (event) => {
+    const customEvent = event as CustomEvent;
+    const message = customEvent.detail?.message;
+    const status = customEvent.detail?.status;
+
+    Swal.fire({
+      title: status == "success" ? "Sukses!" : "Error!",
+      text: message,
+      icon: status,
+      confirmButtonText: "Oke",
+    }).then(() => {
+      window.location.reload();
+    });
+  });
+</script>
+
+<Layout>
+  <Navbar />
+  <div class="p-10 w-full">
+    <div class="bg-white p-5 rounded-md">
+      <CreateRole client:visible />
+      <ListRole role={role.value} client:visible />
+    </div>
+  </div>
+</Layout>

@@ -1,0 +1,103 @@
+---
+import { FaRocket, FaUnlockAlt, FaUsers } from "react-icons/fa";
+import { FaUniversalAccess } from "react-icons/fa6";
+import { RiLogoutBoxRFill } from "react-icons/ri";
+import { capitalizeWords } from "../utils/capitalizeWords";
+
+const nama = Astro.cookies.get("nama");
+const permission = JSON.parse(Astro.cookies.get("permission")?.value as string);
+---
+
+<nav class="navbar bg-blue-800 text-white">
+  <div class="flex-none lg:hidden">
+    <button class="btn btn-square btn-ghost">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        class="inline-block h-5 w-5 stroke-current"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
+  </div>
+  <div class="flex-1">
+    <a class="btn btn-ghost normal-case text-xl">AstroBoy <FaRocket /></a>
+  </div>
+  <div class="flex-none hidden lg:block">
+    <ul class="menu menu-horizontal px-1">
+      {
+        permission.some(
+          (permission: { code: string }) =>
+            permission.code === "can_access_users",
+        ) && (
+          <li class="bg-blue-700 radio-success rounded-md hover:bg-blue-950 mr-1">
+            <a href="/user">
+              <FaUsers />
+              Users
+            </a>
+          </li>
+        )
+      }
+
+      {
+        permission.some(
+          (permission: { code: string }) =>
+            permission.code === "can_access_role",
+        ) && (
+          <li class="bg-blue-700 radio-success rounded-md hover:bg-blue-950 mr-1">
+            <a href="/role">
+              <FaUniversalAccess />
+              Role
+            </a>
+          </li>
+        )
+      }
+
+      {
+        permission.some(
+          (permission: { code: string }) =>
+            permission.code === "can_access_permission",
+        ) && (
+          <li class="bg-blue-700 radio-success rounded-md hover:bg-blue-950 mr-1">
+            <a href="/permission">
+              <FaUnlockAlt />
+              Permission
+            </a>
+          </li>
+        )
+      }
+
+      <li class="bg-blue-700 radio-success rounded-md hover:bg-blue-950 mr-1">
+        <a>Selamat Datang {capitalizeWords(nama?.value)}</a>
+      </li>
+      <li class="bg-red-700 radio-success rounded-md hover:bg-red-950">
+        <a href="/api/logout"><RiLogoutBoxRFill size={20} /></a>
+      </li>
+    </ul>
+  </div>
+  <!-- Dropdown menu for mobile -->
+  <div class="lg:hidden">
+    <ul class="menu menu-vertical p-2">
+      <li class="bg-blue-700 radio-success rounded-md hover:bg-blue-950 mb-2">
+        <a><FaUsers />Users</a>
+      </li>
+      <li class="bg-blue-700 radio-success rounded-md hover:bg-blue-950 mb-2">
+        <a><FaUniversalAccess />Role</a>
+      </li>
+      <li class="bg-blue-700 radio-success rounded-md hover:bg-blue-950 mb-2">
+        <a><FaUnlockAlt />Permission</a>
+      </li>
+      <li class="bg-blue-700 radio-success rounded-md hover:bg-blue-950 mb-2">
+        <a>Selamat Datang {nama?.value}</a>
+      </li>
+      <li class="bg-red-700 radio-success rounded-md hover:bg-red-950">
+        <a><RiLogoutBoxRFill size={20} /></a>
+      </li>
+    </ul>
+  </div>
+</nav>

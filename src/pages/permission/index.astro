@@ -1,0 +1,44 @@
+---
+import Navbar from "../../components/Navbar.astro";
+import CreatePermission from "./components/_create";
+import ListPermission from "./components/_list";
+import Layout from "../../layouts/Layout.astro";
+import { atom } from "nanostores";
+import { type Permission } from "../../types/permission";
+import { getPermission } from "./actions/list";
+
+const permission = atom<Permission[]>([]);
+
+const getData = await getPermission();
+if (getData.status === 200) {
+  permission.set(getData.data);
+}
+---
+
+<script>
+  import Swal from "sweetalert2";
+  window.addEventListener("triggerActions", async (event) => {
+    const customEvent = event as CustomEvent;
+    const message = customEvent.detail?.message;
+    const status = customEvent.detail?.status;
+
+    Swal.fire({
+      title: status == "success" ? "Sukses!" : "Error!",
+      text: message,
+      icon: status,
+      confirmButtonText: "Oke",
+    }).then(() => {
+      window.location.reload();
+    });
+  });
+</script>
+
+<Layout>
+  <Navbar />
+  <div class="p-10 w-full">
+    <div class="bg-white p-5 rounded-md">
+      <CreatePermission client:visible />
+      <ListPermission permission={permission.value} client:visible />
+    </div>
+  </div>
+</Layout>

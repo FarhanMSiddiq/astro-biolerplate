@@ -1,0 +1,9 @@
+[build]
+  command = "pnpm run build"
+  publish = "dist"
+
+[build.processing]
+  skip_processing = true
+
+[build.processing.secrets_scanning]
+  enabled = false

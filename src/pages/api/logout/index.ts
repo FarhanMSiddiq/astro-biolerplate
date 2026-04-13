@@ -9,5 +9,10 @@ export const GET: APIRoute = async ({ cookies, request }) => {
 
   const baseUrl = new URL(request.url).origin;
 
-  return Response.redirect(`${baseUrl}/`);
+  return new Response(null, {
+    status: 302,
+    headers: {
+      Location: `${baseUrl}/`,
+    },
+  });
 };

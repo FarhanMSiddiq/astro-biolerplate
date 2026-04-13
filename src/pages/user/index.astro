@@ -1,20 +1,21 @@
 ---
 import Navbar from "../../components/Navbar.astro";
-import CreateUser from './components/_create';
-import ListUser from './components/_list';
+import CreateUser from "./components/_create";
+import ListUser from "./components/_list";
 import Layout from "../../layouts/Layout.astro";
 import { getUser } from "./actions/list";
-import { atom } from 'nanostores';
+import { atom } from "nanostores";
 import { type Users } from "../../types/users";
 
-const users = atom<Users[]>([])
+const users = atom<Users[]>([]);
 
 const getUsers = await getUser();
 if (getUsers.status === 200) {
-    users.set(getUsers.data); 
+  users.set(getUsers.data);
 }
 ---
-<script >
+
+<script>
   import Swal from "sweetalert2";
   window.addEventListener("triggerActions", async (event) => {
     const customEvent = event as CustomEvent;
@@ -22,7 +23,7 @@ if (getUsers.status === 200) {
     const status = customEvent.detail?.status;
 
     Swal.fire({
-      title: (status=="success") ? "Sukses!" : "Error!",
+      title: status == "success" ? "Sukses!" : "Error!",
       text: message,
       icon: status,
       confirmButtonText: "Oke",
@@ -37,7 +38,7 @@ if (getUsers.status === 200) {
   <div class="p-10 w-full">
     <div class="bg-white p-5 rounded-md">
       <CreateUser client:visible />
-      <ListUser users={users.value} client:visible/>
+      <ListUser users={users.value} client:visible />
     </div>
   </div>
 </Layout>

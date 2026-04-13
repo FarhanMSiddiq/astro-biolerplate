@@ -38,8 +38,18 @@ const setClientToken = (instance: AxiosInstance, token: string) => {
   instance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 };
 
+const getBaseURL = () => {
+  // client (browser)
+  if (typeof window !== "undefined") {
+    return "/api/";
+  }
+
+  // server (SSR / Netlify)
+  return (process.env.URL || "http://localhost:4321") + "/api/";
+};
+
 const apiClient = ApiClient({
-  baseURL: "/api/",
+  baseURL: getBaseURL(),
 });
 
 export { apiClient, setClientToken };

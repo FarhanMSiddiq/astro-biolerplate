@@ -10,6 +10,18 @@ Astro template dengan **PostgreSQL** sebagai database dan **daisyUI** untuk UI, 
 - ✅ CRUD Permission
 - ✅ Assign User, Role, dan Permission
 
+🌐 Live Demo <br>
+Coba langsung aplikasi di sini:
+👉 https://astro-biolerplate.netlify.app/
+
+🔐 Demo Account <br>
+Gunakan akun berikut untuk login:
+
+```
+Email    : user@gmail.com
+Password : password123
+```
+
 ## 🛠 Tech Stack
 
 - **Node.js**: v20.18.2
